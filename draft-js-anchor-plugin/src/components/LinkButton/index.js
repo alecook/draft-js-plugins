@@ -27,10 +27,15 @@ export default class LinkButton extends Component {
 
   render() {
     const { theme, onRemoveLinkAtSelection } = this.props;
-    const hasLinkSelected = EditorUtils.hasEntity(
-      this.props.store.getEditorState(),
-      'LINK'
-    );
+    let hasLinkSelected = '';
+    try {
+      hasLinkSelected = EditorUtils.hasEntity(
+        this.props.store.getEditorState(),
+        'LINK'
+      );
+    } catch (e) {
+      hasLinkSelected = '';
+    }
     const className = hasLinkSelected
       ? unionClassNames(theme.button, theme.active)
       : theme.button;
